@@ -1,86 +1,55 @@
-\chapter{The Second Squared Chapter}
+% \chapter{Discussion and Conclusion}
 
-An average research project may contain five chapters, but I didn't plan my work properly
-and then ran out of time. I spent too much time positioning my figures and worrying
-about my preferred typographic style, rather than just using what was provided.
-I wasted days bolding section headings and using double slash line endings, and 
-had to remove them all again. I spent sleepless nights configuring manually numbered lists
-to use the \LaTeX\ environments because I didn't use them from the start or understand
-how to search and replace easily with texmaker.
+% This chapter provides a concise overview of the experimental results, presenting the key aggregate performance metrics and empirical code generation capabilities for the evaluated agent configurations on the MLE-Bench subset.
 
-Everyone has to take some shortcuts
-at some point to meet deadlines. Time did not allow to test model 
-B as well. So I'll skip right ahead and put that under my Future Work section.
+% \section{Aggregate Performance Summary}
 
+% Table \ref{tab:summary_aggregate} summarizes the overall performance of each model configuration, focusing on key metrics such as Valid Submission Rate (VSR), Above Median Rate (AMR), and Any Medal Rate (Pass@3). Made Submission is also included as a primary pipeline success indicator.
 
-\section{This is a section} 
+% \begin{table}[h!]
+%     \centering
+%     \caption{Summary of Aggregate Performance Metrics}
+%     \label{tab:summary_aggregate}
+%     % Using tabularx to make the table fit within the text width
+%     \begin{tabularx}{\textwidth}{p{4.5cm} *{4}{>{\centering\arraybackslash}X}}
+%         \toprule
+%         Method                      & Made Submission (\%) & Valid Submission (\%) & Above Median (\%) & Any Medal (Pass@3 \%) \\
+%         \midrule
+%         \textbf{AIDE} & & & & \\
+%         AIDE + o1-preview          & - & - & - & - \\
+%         AIDE + GPT-4-turbo         & 73.3 $\pm$ 3.3 & 63.3 $\pm$ 3.3 & 20.0 $\pm$ 5.8 & 6.7 \\ % Pass@3 based on provided table
+%         AIDE + gpt-4o-mini         & 76.7 $\pm$ 2.4 & 63.3 $\pm$ 2.4 & 26.7 $\pm$ 2.4 & 10.0 \\ % Pass@3 based on provided table
+%         AIDE + DeepSeek-7B (Base)  & 23.3 $\pm$ 3.3 & 20.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 \\ % Pass@3 based on provided table
+%         AIDE + DeepSeek-7B + SR    & - & - & - & - \\
+%         AIDE + DeepSeek-14B (Base) & 73.3 $\pm$ 2.4 & 60.0 $\pm$ 4.1 & 10.0 $\pm$ 4.1 & 10.0 \\ % Pass@3 based on provided table
+%         AIDE + DeepSeek-14B + SR   & - & - & - & - \\
+%         AIDE + DeepSeek-32B (Base) & 76.7 $\pm$ 3.3 & 63.3 $\pm$ 3.3 & 33.3 $\pm$ 3.3 & 20.0 \\ % Pass@3 based on provided table
+%         AIDE + DeepSeek-32B + SR   & - & - & - & - \\
+%         \midrule
+%         \textbf{Human Performance} & - & - & 50.0 & 12.4 \\
+%         \bottomrule
+%     \end{tabularx}
+%     \caption*{\textbf{Note}: Metrics are mean $\pm$ standard error of the mean, averaged across 10 competitions and 3 seeds, except for Pass@3 which is the percentage of competitions with at least one medal across 3 seeds. SR denotes Self-Reflection strategy. Entries marked '-' indicate data was not available in the provided context.}
+% \end{table}
 
-Some research projects may have 3, 5 or 6 chapters. This is just an example. 
-More importantly, do you have at close to 30 pages?  
-Luck has nothing to do with it. Use the techniques suggested for
-writing your research project.
+% \section{Empirical Code Generation and Submission Attempt Summary}
 
-Now you're demonstrating pure talent and newly acquired skills. 
-Perhaps some persistence. Definitely some inspiration. What was that about perspiration? 
-Some team work helps, so every now and then why not browse your friends' research project and provide
-some constructive feedback?
+% Table \ref{tab:summary_empirical} provides a summary of the average empirical metrics, highlighting the agent's code generation capabilities and pipeline progression based on Valid Code Generation Rate (VCGR), CSV Submission Attempt Rate (CSAR), Average Steps to First Working Output (StepsToWO), and Average Code Quality.
 
-\subsection{Subsubsections are disabled}
-
-Vivamus faucibus arcu ut cursus maximus. Aenean ac aliquet nulla. Duis efficitur varius malesuada. Etiam finibus risus et condimentum commodo. Mauris interdum ligula ut lacinia blandit. Curabitur commodo, mauris vel porttitor semper, ante risus pellentesque ipsum, non commodo sapien massa quis tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus ac massa commodo purus placerat pharetra id ut ex. Nam malesuada, turpis vel iaculis sodales, nisl ante fringilla tellus, et efficitur nisl felis at ligula. 
-\chapter{The Second Squared Chapter}
-\chapter{Summary of Results}
-
-This chapter provides a concise overview of the experimental results, presenting the key aggregate performance metrics and empirical code generation capabilities for the evaluated agent configurations on the MLE-Bench subset.
-
-\section{Aggregate Performance Summary}
-
-Table \ref{tab:summary_aggregate} summarizes the overall performance of each model configuration, focusing on key metrics such as Valid Submission Rate (VSR), Above Median Rate (AMR), and Any Medal Rate (Pass@3). Made Submission is also included as a primary pipeline success indicator.
-
-\begin{table}[h!]
-    \centering
-    \caption{Summary of Aggregate Performance Metrics}
-    \label{tab:summary_aggregate}
-    % Using tabularx to make the table fit within the text width
-    \begin{tabularx}{\textwidth}{p{4.5cm} *{4}{>{\centering\arraybackslash}X}}
-        \toprule
-        Method                      & Made Submission (\%) & Valid Submission (\%) & Above Median (\%) & Any Medal (Pass@3 \%) \\
-        \midrule
-        \textbf{AIDE} & & & & \\
-        AIDE + o1-preview          & - & - & - & - \\
-        AIDE + GPT-4-turbo         & 73.3 $\pm$ 3.3 & 63.3 $\pm$ 3.3 & 20.0 $\pm$ 5.8 & 6.7 \\ % Pass@3 based on provided table
-        AIDE + gpt-4o-mini         & 76.7 $\pm$ 2.4 & 63.3 $\pm$ 2.4 & 26.7 $\pm$ 2.4 & 10.0 \\ % Pass@3 based on provided table
-        AIDE + DeepSeek-7B (Base)  & 23.3 $\pm$ 3.3 & 20.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 \\ % Pass@3 based on provided table
-        AIDE + DeepSeek-7B + SR    & - & - & - & - \\
-        AIDE + DeepSeek-14B (Base) & 73.3 $\pm$ 2.4 & 60.0 $\pm$ 4.1 & 10.0 $\pm$ 4.1 & 10.0 \\ % Pass@3 based on provided table
-        AIDE + DeepSeek-14B + SR   & - & - & - & - \\
-        AIDE + DeepSeek-32B (Base) & 76.7 $\pm$ 3.3 & 63.3 $\pm$ 3.3 & 33.3 $\pm$ 3.3 & 20.0 \\ % Pass@3 based on provided table
-        AIDE + DeepSeek-32B + SR   & - & - & - & - \\
-        \midrule
-        \textbf{Human Performance} & - & - & 50.0 & 12.4 \\
-        \bottomrule
-    \end{tabularx}
-    \caption*{\textbf{Note}: Metrics are mean $\pm$ standard error of the mean, averaged across 10 competitions and 3 seeds, except for Pass@3 which is the percentage of competitions with at least one medal across 3 seeds. SR denotes Self-Reflection strategy. Entries marked '-' indicate data was not available in the provided context.}
-\end{table}
-
-\section{Empirical Code Generation and Submission Attempt Summary}
-
-Table \ref{tab:summary_empirical} provides a summary of the average empirical metrics, highlighting the agent's code generation capabilities and pipeline progression based on Valid Code Generation Rate (VCGR), CSV Submission Attempt Rate (CSAR), Average Steps to First Working Output (StepsToWO), and Average Code Quality.
-
-\begin{table}[h!]
-    \centering
-    \caption{Summary of Empirical Code Generation and Submission Attempt Metrics}
-    \label{tab:summary_empirical}
-    % Using tabularx to make the table fit within the text width
-    \begin{tabularx}{\textwidth}{p{4.5cm} *{5}{>{\centering\arraybackslash}X}}
-        \toprule
-        Metric                     & AIDE + gpt-4o-mini & AIDE + GPT-4-turbo & AIDE + DeepSeek-7B (Base) & AIDE + DeepSeek-14B (Base) & AIDE + DeepSeek-32B (Base) \\
-        \midrule
-        VCGR (\%)                   & 40.53              & 40.40              & 3.73                      & 24.83                      & 25.63                      \\
-        CSAR (\%)                   & 41.47              & 41.87              & 4.93                      & 29.24                      & 26.50                      \\
-        Avg. Steps to First WO     & 9.77               & 12.00              & 28.77                     & 13.86                      & 13.56                      \\
-        Avg. Code Quality (1-10)    & 5.76               & 5.86               & 3.66                      & 5.00                       & 5.26                       \\
-        \bottomrule
-    \end{tabularx}
-    \caption*{\textbf{Note}: Metrics are averaged over all available runs (typically 10 competitions $\times$ 3 seeds). VCGR is the percentage of steps generating valid code. CSAR is the percentage of steps attempting a CSV submission. StepsToWO is the average number of steps to the first working output (using the \texttt{StepsToWO\_inf\_replaced} value from the source data). Avg. Code Quality is on a scale of 1--10. Data for models with the Self-Reflection strategy was not available in the provided aggregate empirical summaries.}
-\end{table}
+% \begin{table}[h!]
+%     \centering
+%     \caption{Summary of Empirical Code Generation and Submission Attempt Metrics}
+%     \label{tab:summary_empirical}
+%     % Using tabularx to make the table fit within the text width
+%     \begin{tabularx}{\textwidth}{p{4.5cm} *{5}{>{\centering\arraybackslash}X}}
+%         \toprule
+%         Metric                     & AIDE + gpt-4o-mini & AIDE + GPT-4-turbo & AIDE + DeepSeek-7B (Base) & AIDE + DeepSeek-14B (Base) & AIDE + DeepSeek-32B (Base) \\
+%         \midrule
+%         VCGR (\%)                   & 40.53              & 40.40              & 3.73                      & 24.83                      & 25.63                      \\
+%         CSAR (\%)                   & 41.47              & 41.87              & 4.93                      & 29.24                      & 26.50                      \\
+%         Avg. Steps to First WO     & 9.77               & 12.00              & 28.77                     & 13.86                      & 13.56                      \\
+%         Avg. Code Quality (1-10)    & 5.76               & 5.86               & 3.66                      & 5.00                       & 5.26                       \\
+%         \bottomrule
+%     \end{tabularx}
+%     \caption*{\textbf{Note}: Metrics are averaged over all available runs (typically 10 competitions $\times$ 3 seeds). VCGR is the percentage of steps generating valid code. CSAR is the percentage of steps attempting a CSV submission. StepsToWO is the average number of steps to the first working output (using the \texttt{StepsToWO\_inf\_replaced} value from the source data). Avg. Code Quality is on a scale of 1--10. Data for models with the Self-Reflection strategy was not available in the provided aggregate empirical summaries.}
+% \end{table}

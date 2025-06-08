@@ -32,6 +32,7 @@
 
 % fix quotation marks like "this"
 % NOTE incompatible with quiver labels
+\RequirePackage[utf8]{inputenc}
 \RequirePackage{csquotes}
 \MakeOuterQuote{"}
 

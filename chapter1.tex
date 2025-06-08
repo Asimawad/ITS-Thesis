@@ -1,28 +1,28 @@
 \chapter{Introduction}
 
-\section{Moving On}
-Let's demonstrate a figure by looking at Fig.~\ref{bandwidth}. 
+Over the last few years, advancements in large language models have primarily relied on scaling up the number of parameters alongside increasing dataset size and compute budgets. This strategy, often referred to as train-time compute scaling, has been remarkably effective, significantly and consistently improving model performance on tasks such as translation, general question answering, and sophisticated reasoning in mathematics and coding. However, the exponential growth in model size and the associated costs have become prohibitively expensive, pushing training budgets to the billion-dollar scale and raising concerns about resource sustainability, particularly as high-quality training data becomes scarcer.
 
-\begin{figure}[!h]
-% Use "\centering" in floats (figure, table), but if you need to center
-% some text (why?) use "\begin{center}...\end{center}".
-\centering
-% Figure environments same as 0.8 * \textwidth please
-% That does not necessarily mean the actual picture size,
-% it is a guideline for the environment which could contain
-% 2 or more pictures! Be consistent and follow the guidelines
-% provided in your sources.
-\includegraphics[width=0.8\textwidth]{images/bandwidth-colour.png}
-\caption{Planning community bandwidth sharing costs. Note caption capitalization.}
-\label{bandwidth}
-% if you move the label it breaks the reference numbering; 
-% always have it *after* the caption.
-\end{figure}
+Consequently, significant interest has shifted toward inference-time (or test-time) scaling techniques. Rather than focusing on costly retraining and larger models, inference-time scaling enhances existing models by dedicating additional computational resources during prediction. These methods enable models to "think longer" on challenging problems by dynamically generating multiple reasoning paths, employing voting mechanisms, or iteratively refining their outputs. Recent studies, such as DeepMind's compute-optimal scaling \citep{placeholder}, demonstrate how smaller models can achieve impressive performance through adaptive inference strategies, sometimes even outperforming substantially larger models.
 
-% Remember how to include code with {\tt verbatim} 
-% and to fix the tabs in {\sf python} in a verbatim environment? 
-% It may be best to have an `include' command for code, 
-% not to have to re-edit it all the time.
-\verbatimtabinput{code/mycode.py}
+In parallel with these developments, there has been a notable emergence of "reasoning" or "thinking" models, designed explicitly to enhance models' capabilities to reason through complex problems. A prime example is DeepSeek-R1, which explicitly trains models using reinforcement learning to produce long, structured chains of thought before providing an answer, enabling LLMs to systematically tackle tasks that were previously challenging even for large-scale models. DeepSeek released a series of small distilled models trained on reasoning datasets generated from the original R1 model, empowering them with remarkable reasoning capabilities and improving their performance relative to larger models.
 
+Motivated by these developments, this work explores the promise of inference-time scaling techniques applied to small-scale language models-particularly those distilled from DeepSeek-that are specifically designed for coding and machine learning engineering tasks, areas still challenging even for frontier models. Smaller models have substantial advantages in accessibility, rapid deployment, and lower operational costs, but traditionally lack the advanced reasoning capabilities exhibited by larger models. Through systematic implementation and evaluation of strategies such as chain-of-thought prompting, iterative self-refinement, self-consistency, and other methods, this project aims to bridge the performance gap. Ultimately, this thesis evaluates the extent to which inference-time scaling can address complex tasks such as machine learning engineering. We demonstrate that, with carefully designed inference-time enhancements, small-scale models can significantly improve performance in complex coding and engineering contexts, presenting a viable and cost-effective alternative to training massive foundational models.
 
+% \section{Introduction}
+% The field of artificial intelligence is witnessing an unprecedented scaling race, where models with hundreds of billions of parameters demonstrate remarkable capabilities that seem to emerge from sheer computational scale. This phenomenon has created a stark divide in the AI landscape: while large proprietary models like GPT-4 and Claude achieve impressive performance on complex reasoning and coding tasks, smaller open-source alternatives lag significantly behind, creating substantial barriers to accessibility and democratization of AI capabilities.
+% This performance gap is particularly pronounced in machine learning engineering tasks, where AI agents must not only write syntactically correct code but also reason about complex architectural decisions, debug intricate workflows, and navigate the nuanced requirements of end-to-end ML pipelines. Unlike general-purpose coding, ML engineering demands sophisticated reasoning about data preprocessing, model selection, hyperparameter optimization, and deployment considerations—capabilities that have remained largely the domain of expensive, proprietary models.
+% The emergence of inference-time scaling (ITS) techniques offers a promising pathway to bridge this performance divide. Rather than requiring massive computational resources during training, ITS methods like chain-of-thought prompting, self-consistency, and iterative refinement allow smaller models to achieve enhanced performance by investing additional computation during inference. This paradigm shift suggests that the reasoning capabilities necessary for complex tasks might be accessible to open-source models through strategic application of ITS techniques.
+% Recent advances in distilled reasoning models, particularly DeepSeek-R1's family of models ranging from 7B to 32B parameters, present an opportunity to test this hypothesis. These models demonstrate strong reasoning capabilities even at smaller scales, potentially providing the foundation needed for effective ML engineering agents when enhanced with appropriate ITS strategies.
+% However, existing agentic frameworks have primarily focused on proprietary models accessed through APIs, leaving open-source implementations under-explored. While ITS techniques have been applied to coding tasks, their systematic integration with distilled reasoning models specifically for ML engineering remains largely uncharted territory. This gap represents both a technical opportunity and a practical necessity for organizations seeking to develop their own AI assistants without relying on expensive proprietary solutions.
+% This thesis addresses these challenges by developing and evaluating an enhanced version of AIDE (AI-Driven Exploration), an open-source agentic scaffold specifically tailored for inference-time scaling with open-source models. Our approach integrates multiple ITS strategies—including self-consistency, iterative self-debugging, and modular task decomposition—with DeepSeek-R1 distilled models to create accessible ML engineering agents capable of autonomously tackling complex machine learning competitions.
+% Contributions
+% This work makes four key contributions to the field:
+
+% High-Performance Open-Source Infrastructure: We develop a high-throughput parallel inference engine with multiprocess orchestration, enabling simultaneous experimentation across different models and tasks while maintaining competitive inference speeds for open-source deployments.
+% Specialized Agentic Scaffold: We create an open-source agent framework specifically designed for the HuggingFace ecosystem, providing an alternative to proprietary API-based solutions and enabling broader accessibility to ML engineering automation.
+% Systematic ITS Integration: We implement and evaluate multiple variants of AIDE, each incorporating different ITS strategies, providing a comprehensive exploration of inference-time scaling techniques for ML engineering tasks. These variants are made available as separate repository branches with a unified interface for strategy selection.
+% Empirical Validation: We demonstrate that a 32B open-source model enhanced with appropriate ITS techniques can achieve performance comparable to GPT-4 Turbo on ML engineering tasks, reaching a practical level where the agent can autonomously solve Kaggle competitions end-to-end.
+
+% Thesis Overview
+% The remainder of this thesis is organized as follows. Chapter 2 provides essential background on agentic systems in research workflows, reviews the effectiveness of ITS techniques across domains, introduces the concept of agent scaffolding, and surveys existing benchmarks for evaluating ML engineering capabilities. Chapter 3 details our methodology, including the original AIDE framework, MLE-Bench evaluation protocols, and our systematic approach to integrating ITS strategies within the agentic scaffold. We discuss experimental design choices, cost considerations, baseline selection rationale, and provide detailed implementation insights for each ITS method. Chapter 4 presents comprehensive experimental results, including numerical evaluations of agent performance, analysis of observed behaviors, and discussion of failed approaches. Finally, Chapter 5 concludes with implications for future research and practical deployment considerations.
+% Through this systematic investigation, we aim to demonstrate that the performance gap between proprietary and open-source models in ML engineering can be substantially reduced through careful application of inference-time scaling techniques, opening new avenues for accessible and democratized AI-driven automation in machine learning workflows.

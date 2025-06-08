@@ -1,65 +1,188 @@
-\chapter{The Second Chapter}
+% % \documentclass[11pt]{article}
+% % \usepackage{amsmath,amssymb,amsfonts,amsthm,latexsym} 
+% % \usepackage[a4paper,text={6.5in,9in}]{geometry} 
+% % \begin{document}
 
-When you get stuck, don't panic. 
-The world is unlikely to end just now. 
-Remember you can consult your supervisor, tutor, Nolu, Jan, 
-and Simukai and Barry at agreed times. 
+% \chapter{Background and Related Work}
 
-\begin{thm}[Jeff's Washing Theorem]
-\label{thm:jwt}
-If an item of clothing is too big, then washing it makes it bigger;
-but if it is too small, washing it makes it smaller.
-\end{thm}
-\begin{proof}
-Stated without proof. But a proof would look like this. 
-\end{proof}
+% \section{Background}
 
-Notice that no Lemmas are required in the proof of Theorem \ref{thm:jwt}.
+% \subsection{Large Language Models (LLMs)}
+% Large Language Models (LLMs) are neural networks trained on extensive text datasets, capable of generating human-like text. Based primarily on the transformer architecture, these models utilize a straightforward predictive objective, leveraging enormous volumes of data to tackle complex problems and diverse natural language tasks [CITATION], including translation [CITATION], semantic analysis [CITATION], and information retrieval.
 
-Use \textbackslash ref for tables, figures, theorems, etc. and \textbackslash eqref for equations.
+% Recent advancements in LLMs, exemplified by models such as the GPT series [CITATION*3] and the Llama family [CITATION], have been driven by significant scale, reaching billions of parameters. This substantial scale has unlocked emergent abilities—advanced skills like reasoning and in-context learning—that smaller models typically do not exhibit. These emergent capabilities enable LLMs to solve arithmetic problems, answer intricate questions, and summarize complex passages, often without explicit task-specific training.
 
-Use \textbackslash ldots for continuation of commas $,\ldots,$ and \textbackslash cdots for continuation of operators $\times\cdots\times$.
+% \subsection{Scaling Laws and Train-Time Compute}
+% Scaling lows shows how the performance of Large Language models improves in a predeictable way with the increase in the parameter size, training data and computationa; resources, openai ahs shown that LLMs performance as measured by metrics such as accuracy or perplexity follows a power low relationship with these scaling factors. Performance enhancements are steady yet exhibit diminishing returns as scale increases, motivating the development of increasingly larger models like PaLM and Chinchilla.
+
+% While scaling laws provided performance guarantees and drove a competitive race for building larger models, leading to current models in the hundreds of billions of parameters, practical limitations have surfaced. High-quality data is becoming scarce relative to growing model demands, and the significant costs and resource consumption associated with these models pose substantial challenges. Moreover, LLMs auto-regressive and token level prediction style is itself a limitation when it comes to complex reasoning tasks such as advanced mathematics or complex question answering. While recent years witnessed substantial developments in the models abilities, especially using post training and fine tuning, this requires massive computational resources and large scale datasets, encouraging researchers to to find cheaper approaches.
+
+% \subsection{Inference-Time Scaling (ITS)}
+% To address limitations associated with traditional scaling strategies, a new paradigm has emerged: inference-time scaling, also known as test-time scaling. Instead of allocating more resources to pretraining, this approach dynamically adjusts computational resources during inference, enabling models to "think longer" and thus handle more complex problems. Inference-time scaling involves techniques such as generating longer reasoning chains, sampling multiple possible answers, and iteratively refining outputs. This strategy has shown significant promise, allowing smaller models to surpass larger counterparts.
+
+% Techniques in inference-time scaling include:
+% \begin{itemize}
+% \item \textbf{Chain-of-Thought Prompting (CoT):} Encouraging models to explicitly generate intermediate reasoning steps.
+% \item \textbf{Iterative Self-Refinement:} Models iteratively identify and correct errors in their outputs.
+% \item \textbf{Self-Consistency:} Generating multiple independent outputs and selecting the most consistent result via voting.
+% \item \textbf{Verifier-Guided Search Techniques:} Utilizing reward-based verifiers or structured search methods to identify optimal answers from multiple generated solutions.
+% \end{itemize}
+
+% \subsection{Emergence of Reasoning Models}
+% Recent developments have highlighted the emergence of models focused on reasoninging specifically designed to enhanthe capabilities in multistep  logical and mathematical reasoning. These reasoning models utilize inference-time strategies like structured prompting, external tool usage, and systematic search without altering model weights. Techniques such as ReAct, PAL, Toolformer, and Tree-of-Thoughts have demonstrated significant improvements in reasoning abilities.
+
+% DeepSeek-R1 serves as a notable landmark, explicitly trained via reinforcement learning on structured reasoning datasets to generate coherent reasoning chains, significantly improving performance on complex reasoning tasks. DeepSeek's release of smaller distilled models, trained on datasets generated by R1, demonstrates the potential of distillation combined with structured inference strategies, achieving performance comparable or superior to larger models.
+
+% * the effect of rl training on producing long chains of thoughts
+% * the distilled models that were trained on the reasoning datata from R1 model
+
+% \subsection{Agentic Systems and Scaffolding}
+% "Scaffolding" reffers to code built up around an LLM in order to augment its capabilities. This does not typically include code which alters the LLM's internals, such as fine-tuning or activation steering. People use scaffolding because it can allow LLMs to use tools, reduce error rates, search for info, all of which make LLMs more capable.
+% Common types of scaffolds include:
+% Prompt templates: Perhaps the simplest scaffolds, "prompt templates" are just prompts with some blank sections to be filled in at runtime using some local data. E.g., a template like "You are a good assistant. The date is {INSERT DATE HERE}. Tell me how many days are left in the month." can be filled in with the current date before being used to prompt an LLM.
+% Retrieval Augmented Generation (RAG): For tasks which have some associated data, RAG is a way of automatically adding task-relevant info to prompts. RAG does this by looking for snippets of text/data in the database which are relevant to the user's prompt, and then adding those snippets to the prompt.
+% Search engines: Similar to RAG, giving an LLM access to a search engine lets it find info relevant to its prompt. Unlike RAG, the LLM decides what to search for and when.
+% Agent scaffolds: Scaffolds which try to make LLMs into goal-directed agents, i.e., giving an LLM some goal/task to perform, and ways to observe and act on the world. Usually, the LLM is put into a loop with a history of its observations and actions, until its task is done. Some agent frameworks give LLMs access to much more powerful high-level actions, which saves the AI from repeating many simple primitive actions and, therefore, speeds up planning.
+
+% Agent scaffolds are characterized by their capacity for perception, planning, and action within an environment, often governed by an iterative process that refines, reflects, and improves the solution over multiple cycles.
+
+% While agents scaffolds can be used in different domains and wide array of tasks, there has been increasing interest dedicated to developing agents capable of automating the machine learning research and engineering process. A notable example is the [AI scientist] system, which presents an end-to-end pipeline designed to automate the research workflow. Currently, data science, machine learning engineering, and more generally, coding agents and assistants have shown consistent improvements. as we now see agents like Gihub Capilot, Cognition | Introducing Devin, Cursor, or Claude code exhibit phenomenon coding abilities, but there is no significant progress in their open-source coding agents. 
+
+% The nature of coding problems presents a unique challenge for LLMs compared to other reasoning tasks, such as mathematics. In mathematical reasoning, there is often a single, unambiguously verifiable answer that can be derived through logical deduction. Conversely, generating a coding solution involves not only producing syntactically correct and executable code, but also navigating a vast solution space, where multiple functionally equivalent but structurally diverse implementations can exist. Crucially, the correctness and optimality of a coding solution often necessitate empirical validation through actual code execution and looking at traceback, rather than purely symbolic or logical verification. This inherent complexity, which demands iterative refinement and empirical testing, underscores the critical need for sophisticated agentic systems that can autonomously generate, execute, and iteratively refine solutions, even for highly capable foundational models.
+
+% \subsection{Relevance and Challenges in Coding and ML Engineering Tasks}
+% Machine learning engineering and coding tasks represent particularly challenging yet highly relevant applications for inference-time scaling due to their inherent complexity and precision requirements. Benchmarks like HumanEval, MBPP, and MLE-Bench exemplify these tasks, providing challenging evaluation contexts.
+
+% However, significant gaps persist in current research, such as limited open-source implementations and insufficient evaluation on realistic, complex coding tasks. This project explicitly addresses these gaps by systematically applying inference-time scaling techniques to small-scale distilled reasoning models, aiming to substantially enhance their performance and practical applicability in coding and ML engineering domains.
+
+% CITATION NEEDED
+% \section{Related Work}
+% * systems such as aide, or any open source implemntaion
+% * infercne time and how it improves small models
+% *** I should find example for MATH of course ***
+ 
+% % **Refine this thing**
+% % \subsection{Inference-Time Scaling Techniques in the Coding Domain}
+
+% The core idea in Inference-Time Scaling (ITS) for code generation is to allow a model to generate and evaluate multiple solutions or reasoning steps before finalizing an answer, much like a programmer iteratively writes, tests, and debugs code. This can enable smaller models to achieve results on par with much larger models by compensating with clever search and reasoning. Below is an overview of relevant ITS
+% strategies in the context of code generation:
+
+% \subsection{Multiple Sampling and Majority Voting}:
+% The simplest form of test-time compute scaling is to sample many outputs and pick the best, much like an ensemble methods, this can be very effective as the LLMs output are not generally deterministic, and in theory. For coding, this might mean prompting a 7B model 10 times for a function implementation and then using a heuristic to choose among those attempts. Majority voting is one approach where if multiple samples converge on the same answer, that answer is taken as more likely correct. However, for complex coding problems (especially ones without a single "exact" answer), majority voting may not help much – if the model tends to make a consistent mistake, all samples will be wrong in the same way. Nonetheless, for simpler tasks (like leetcode-style problems with fixed outputs), self-consistency via voting can reduce random errors. 
+
+% A more effective variant is "Best-of-N" selection, where instead of voting, the best candidate out of N is chosen based on an evaluation function. In coding, the evaluation function could be a set of unit tests or a code quality metric. For example, generate 5 different code solutions and then run all of them against some test cases, picking the one that passes the most tests. 
+
+% This Best-of-N strategy was found to significantly improve math problem solving for small
+% models when using an automated judge, and for code it can similarly boost correctness if a reliable evaluator is available. In practice, Best-of-N requires more inference runs (linear in N) and possibly running a reward model or tests to rank outputs, but it's a straightforward way to leverage extra compute. 
+
+% Iterative Self-Improvement (Self-Reflection and Debugging): instead of generating
+% many answers independently, another approach is to have the model improve
+% a single solution by self-correcting mistakes in an iterative way. Techniques like self-
+% reflection, as well as Self-Debugging and Reflexion feedback loops.
+
+% The general pattern is: the model produces an initial solution, then the model (or another instance of it or another role controlled by the system prompt) is asked to inspect that solution for errors or flaws, and propose a fix, and this process repeats. In code generation, this mirrors the edit-compile-fix cycle programmers use. For example, Chen et al. (2023) introduced Self-Debugging, where an LLM is taught via examples to run the code (or at least simulate running it) and then asked to explain what the code is doing and identify any mistakes based on either runtime results or logical reasoning. Notably, their approach has the model look at execution results (e.g. error messages or failed tests) without human feedback, and then pinpoint the bug and fix it – effectively the model learns to debug itself. This yielded state-of-the-art results on several coding tasks, improving accuracy by up to 12% on test-driven benchmarks by iteratively correcting errors.
+
+% Reflexion, a recent idea for general reasoning, has the model generate a brief "reflec-
+% tion" after a failed attempt, explaining what went wrong and how to adjust its next attempt. This reflection is then prepended to the next query so the model won't repeat the mistake. In coding, a similar approach can be used: after an unsuccessful run (say the model's code didn't produce a valid output or scored poorly), the agent can prompt the model to reflect: "Why did your solution perform poorly? What could be improved?" and use that answer to guide the next code revision.
+
+% These self-corrective loops leverage the model's reasoning ability at inference time to gradually approach a correct solution, instead of having a perfect answer in one shot. 
+
+% They are modular (generator + debugger) and don't require training new models – only cleverly designed prompt sequences and possibly a memory of past failures. This family of techniques is arguably one of the most promising for coding, because coding tasks naturally provide feedback (errors, test outcomes)
+% that the model can learn from on the fly. 
+
+% Search-Based Approaches (Beam Search, Tree-of-Thought, MCTS): Classic AI search algo-
+% rithms can be applied at inference to guide the generation of code. Instead of treating the LLM as a black box that generates one solution, we can treat partial generations as states in a search tree. For instance, beam search is a technique where at each step of code generation, multiple possibilities are kept ("the beam") and the search explores several paths, not just the single most likely token sequence. In natural language generation this is tricky (due to the immense branching), but for structured tasks like code, researchers have attempted to incorporate it. A recent Hugging Face case study used beam search guided by a learned reward model to have a 1B model solve math problems step-by-step, expanding only the promising reasoning paths. 
+
+% They further introduced Diverse Verifier Tree Search (DVTS), which explicitly encourages exploring diverse branches and uses a verifier to prune incorrect logic, preventing the search from converging on a wrong answer too early. Translating this to code: one could imagine generating different code approaches, one branch tries a neural network, another branch tries a gradient boosting model) and then evaluating both, continuing to refine whichever looks more promising. A search algorithm (DFS or BFS with pruning) explores combinations of these thoughts to find an overall successful solution. In coding tasks, a "thought" could be a high-level plan or a code snippet. By evaluating partial solutions (e.g., does the code run up to a certain point without error? Does a partial result look plausible?), an agent can systematically search for correct code. An Example is the S*framework augments parallel sampling with sequential debugging" – generating multiple initial programs, then iteratively debugging each using execution feedback, and then selecting the best program at the end. It even uses adaptive test generation during selection: the LLM is asked to come up with specific inputs that differentiate two candidate programs, then it runs both programs on those inputs to see which one fails. Such adaptive search is quite advanced – effectively using the model to adversarially test its own outputs – and it was shown to let a 3B coder outperform models as large as 70B on code benchmarks. 
+
+% In summary, search-based ITS techniques treat code generation as a search problem, leveraging multiple candidates and systematic exploration. These methods require more
+% complex control logic (to manage the search and comparisons) and sometimes an external judge (which can be the model itself in a verifier role), but they can dramatically improve coverage of the solution space for tricky coding tasks.
+
+% Tool-Assisted and Modular Reasoning: Another angle for inference-time improvement is
+% giving the model external tools or modules to use while solving the problem. In coding, the
+% most pertinent tool is a Python interpreter or execution environment. An agent with tool use ReAct paradigm or API toolformer approaches can decide to run a piece of code to see
+% what happens and incorporate the result into its next step. For example, if the task is to write a function, the agent could generate a candidate, execute it on some test inputs, and observe the outputs or any exceptions, then adjust accordingly. for general coding tasks, letting the model search error messages or look up API usage could help a smaller model correct mistakes that it wouldn't know how to fix from training data alone. 
+
+% A modular approach could also mean splitting the problem among specialized modules: for instance, a static analyzer module could lint the model's code for syntax errors or bad practices, and a test generator module could produce unit tests for the code. These modules might themselves be LLM prompts
+% or traditional programs. Their feedback can then be fed into the model's next inference. Because
+% these happen at inference time (no weights changed, just additional computation/feedback), they
+% fall under ITS. example for this is to integrate a type-checker: the model writes Python code, run a type checker or even a lightweight symbolic execution to catch obvious misuses, then prompt
+% the model with "The following variables might be undefined." By incorporating such tools in the loop,
+% we can elevate a smaller model's performance – it doesn't need to have all knowledge internally
+% if it can query an external helper. The ReAct framework demonstrated that even a single LLM
+% agent can use tools effectively by interleaving reasoning and acting steps. In coding, this could
+% mean the agent alternates between "think about how to solve" and "try running this piece" actions.
+% Overall, tool-assisted inference allows modularizing the task and providing grounded feedback
+
+% Agentic Scaffolding and Role Decomposition: Closely related to the above, many agent
+% frameworks split the problem-solving into multiple roles or phases. An example would be a planner-executor paradigm: first prompt the LLM to write a high-level plan or pseudo-code, then in a second prompt have it implement that plan in actual code. This helps because the model can focus on logical planning in one stage and syntax in another, reducing cognitive load. Another example is having a separate critic agent: one model (or one chain of prompts) produces a solution, and another model (or later prompts of the same model) evaluates that solution. For coding, one might have: a "data scientist" agent that decides what model to use, a "coder" agent that writes the code, and a "tester" agent that runs and verifies the code. All could be orchestrated in one loop. Such modular, agentic strategies can dramatically improve outcomes since mistakes caught by one module can be fixed before the final answer. They don't require additional training if we use the same base model with different prompts, though they
+% incur more inference calls. This approach has been demonstrated in other domains (for example, decomposition into sub-agents for math word problems). 
+% In code generation, the AutoKaggle system (2024) uses a multi-agent workflow with different specialists collaborating on a competition problem. While complex, this shows promise in handling the many facets of ML engineering (data cleaning, modeling, hyperparameter tuning) through coordinated inference-time work.
+% In summary, inference-time scaling in coding tasks includes sampling-based methods (generate many solutions, then filter or vote), iterative improvement (let the model refine its answer using feedback,
+% either self-generated or from executing code).
+
+% \subsection{Machine Learning Engineering Benchmarks and Automated research workflow}
+
+% coding benchmarks like swebench*
+% agent scaffolds like AutoML (H2O) etc *
+% AI scientist, and kaggle agents.*
 
 
-\section{Literature Review}
-% Content similar to OCR pages 6-8, 7-17, 6-16
-
-
-\subsection{Overview of Large Language Models}
-% Content from OCR page 6, 6
-Large Language Models (LLMs) have revolutionized the field of natural language processing (NLP), propelled by advancements in neural network architectures \cite{vaswani2017attention}. Early models relied on statistical methods; the introduction of RNNs and LSTMs \cite{hochreiter1997long} addressed some limitations. The Transformer architecture \cite{vaswani2017attention} marked a significant paradigm shift.
-
-\subsection{Coding Agents}
-% Content from OCR page 6, 6
-Agent frameworks, also known as scaffolds split the problem-solving into multiple roles or phases. For instance, AIDE, ResearchAgent, CodeAct, each of which structures the LLM’s process differently. An example would be a \textbf{planner-executor paradigm}: first prompt the LLM to \textbf{write a high-level plan} or pseudo-code, then in a second prompt have it implement that plan in actual code. This helps because the model can focus on logical planning in one stage and syntax in another, reducing cognitive load. Another example is having a \textbf{separate critic agent}: one model (or one chain of prompts) produces a solution, and another model (or later prompts of the same model) evaluates that solution. 
-
-% \subsection{AIDE Agent Framework and Inference-Time Scaling}
-% \textbf{AIDE (AI-Driven Exploration)} is an agentic framework that uses large language models to solve machine learning tasks (notably Kaggle competitions) by generating and iteratively improving code solutions. The agent operates in a loop akin to how a human engineer would: it \textbf{generates an initial solution, runs it, debugs and evaluates it, then refines the code} based on feedback. This iterative optimization is a form of \textbf{inference-time scaling} – instead of producing an answer in one pass, AIDE allocates multiple inference steps for the model to “think” longer and improve its solution. A key element of AIDE’s current inference-time approach is its \textbf{self-reflection logic}, a two-step self-review process for code quality. In practice, after the model drafts a code solution, AIDE invokes a reflection routine that (1) \textbf{critiques the code and suggests minimal edits}, and (2) \textbf{applies those edits to produce a revised code}. This occurs at inference time (no further training), effectively giving the model a chance to correct obvious mistakes or inefficiencies before proceeding. If the reflection finds no issues (the critique might respond with \textit{“No specific errors found requiring changes.”}), AIDE knows the code likely doesn’t need minor fixes. Otherwise, the suggested improvements (provided as natural language instructions) are applied to get a refined solution, which AIDE can then execute. This self-reflection mechanism is inspired by human code review and is a lightweight way to boost correctness without an outside debugger. Notably, AIDE’s self-reflection is done by the same LLM (just prompted to act as a reviewer), so it \textbf{scales the “thinking time” of the model} by chaining model calls: first to generate code, then to analyze it, and finally to regenerate improved code.
-
-% Beyond self-reflection, the AIDE framework performs full \textbf{solution testing and iterative refinement}. It doesn’t stop at one code draft – it is designed to \textbf{“iteratively run\textbackslash{}[], debug\textbackslash{}[], evaluate\textbackslash{}[], and improve\textbackslash{}[], the ML code, all by itself.”} In other words, AIDE actually executes the code on the given dataset (using the competition’s training/test data), observes the outcome (e.g. model performance or runtime errors), and feeds that feedback into subsequent model prompts. This aligns with AIDE’s \textit{Solution Space Tree Search} strategy described by its authors, where each cycle consists of: a \textbf{Solution Generator} (the LLM proposing a new or modified code), an \textbf{Evaluator} (running the code and checking its performance against the objective), and a \textbf{Solution Selector} (choosing the best solution or next direction based on results). In essence, AIDE is already leveraging inference-time compute by allowing multiple model iterations and code runs to converge on a good solution. Empirically, this approach has paid off: in an internal benchmark of 60+ Kaggle competitions, AIDE’s autonomous solutions on average outperformed \textbf{over 50\% of human contestants} – a striking result for a 7B-32B parameter model competing against human Kagglers. This demonstrates how a smaller model, given the chance to \textbf{reflect, execute, and refine multiple times}, can reach human-level performance on complex coding tasks.
-
-% Importantly, the use of \textbf{inference-time scaling} (also called test-time or run-time scaling) is what enables AIDE to punch above the raw capability of its base model. Instead of relying solely on the pretrained knowledge of the LLM, AIDE’s framework \textbf{lets the model use more computation per query} – analogous to letting it “think longer” or explore several solution attempts. Experiments with inference-time scaling by \cite{nvidia_scaling} have similarly shown that even extremely large models benefit from taking more time to reason through a problem rather than answering in one go. AIDE’s self-reflection is one such reasoning step (focusing on code quality), and its iterative loop of generating and testing code is another (focusing on solution performance). Together, these strategies allow a model like DeepSeek-32B or smaller to approach problems methodically, narrowing the gap to much larger models that might solve it in a single shot. In summary, \textbf{AIDE’s agent framework uses structured prompts and tooling to turn a single-pass LLM into a multi-step problem solver}, with self-critiquing and trial-and-error at inference time to boost results.
-
-\subsection{MLE-bench: Evaluating Coding Agents in ML Tasks}
-
-To measure how well approaches like AIDE perform in the coding domain, \cite{mlebench} introduced \textbf{MLE-bench}, a benchmark specifically for \textbf{machine learning engineering tasks}. MLE-bench provides an \textbf{offline Kaggle-like environment} with 75 real competition problems (e.g. predicting house prices, classifying images, etc.), each including the competition description, datasets (training and hidden test data), an evaluation script to score submissions, and a snapshot of the human leaderboard for reference. The “coding domain” here means that an agent must produce \textbf{actual code (usually Python) to train a model and make predictions} for each task. The benchmark then runs that code in a sandbox (Docker) to generate a submission file and uses the provided script to compute the performance metric (such as accuracy, log-loss, RMSE, etc.). This setup mirrors the real workflow of Kaggle: read problem -> write training code -> get predictions -> score the result. Crucially, \textbf{the agent’s performance is evaluated by the same standards as human Kaggle competitors}. MLE-bench compares the agent’s score or ranking on each problem to Kaggle’s medal criteria: for example, if a competition had 500 teams, a top-100 score would be considered a “medal” (since Kaggle awards medals to roughly the top 20\% or top 100, whichever is smaller). By seeing how many competitions an agent can reach medal-level performance, we gauge its coding and ML problem-solving ability in a real-world sense.
-
-\textbf{AIDE was the best-performing agent scaffold in MLE-bench}, according to OpenAI’s report. In evaluations using a powerful model (\cite{oai_o1preview}), the combination of \textbf{AIDE + o1-preview achieved medal-level results in 16.9\% of the 75 competitions}. This was about \textit{four times more medals} than the next-best agent framework evaluated, demonstrating AIDE’s effective design for these tasks. (For context, AIDE with GPT-4o managed \textasciitilde{}8.7\% and other agents with similar LLMs got even fewer medals.) It’s impressive that even with a relatively small model (OpenAI o1 is presumably much smaller than GPT-4), AIDE’s iterative approach was able to crack \textasciitilde{}12–13 competitions at a medal level. The \textbf{benchmark’s structure} makes these results meaningful: each agent had the same constraints (e.g. a fixed number of steps or a time limit, typically a few hours per task), and they were disallowed from cheating via internet access or training-data leaks. The evaluation focuses purely on \textit{coding performance} – can the agent produce a correct, high-performing solution via code. The MLE-bench framework even included checks like \textbf{Dolos plagiarism detection} \cite{dolos} to ensure the agent’s code wasn’t just regurgitating a human solution. In short, \textbf{MLE-bench treats AI agents as Kaggle competitors} and measures success by human-competitive standards (medals and ranks). AIDE’s strong showing indicates that its inference-time strategies (self-reflection, iterative debugging, etc.) translated into better code and model performance on these benchmarks.
-
-It’s worth noting how MLE-bench executes and evaluates an agent. For each competition, the agent is given the problem description and data, then allowed to run until it produces a submission file (or time/step limit is reached). The \textbf{agent’s code is executed on the provided test set}, and the output predictions are scored by the competition’s metric script. This score is then compared to the distribution of human scores (from the public leaderboard) – effectively placing the agent on the leaderboard to see if it’d get a bronze medal, silver, etc. This approach to evaluation is very \textbf{outcome-focused}: it doesn’t directly grade the quality of code (the code could be messy as long as it works), but rather the \textbf{result of running that code}. Thus, an agent that can find a clever solution that trains a good model will score high, whereas an agent that writes syntactically correct code but with a poor modeling approach will score low. This is important in the context of inference-time scaling: sometimes an agent might generate code that runs without errors, but still yields a bad model. The benchmark forces the agent to confront that – ideally via an internal evaluation loop. AIDE’s design, which evaluates and improves its code based on validation performance, is well-suited to this setup. Indeed, AIDE essentially contains an inner loop similar to how MLE-bench judges final performance: it \textbf{runs the code and looks at the objective metric}, allowing it to discard or refine solutions that don’t perform well. This synergy between AIDE’s methodology and the benchmark’s evaluation method is likely a reason AIDE excelled relative to more naive frameworks. Overall, MLE-bench provides a rigorous, coding-centric measure of an agent’s capabilities, and it has confirmed that \textbf{inference-time strategies can greatly boost a small model’s real-world coding performance} (since a scaffold like AIDE let a 3B–32B model occasionally beat much larger models on these tasks).
-
-\subsection{Inference-Time Scaling Techniques in the Coding Domain}
-
-Inference-Time Scaling (ITS) refers to strategies that improve a model’s performance by expending more computation \textit{at inference time}, rather than relying on bigger model size or additional training. In the coding domain – tasks like code generation and problem solving – a variety of ITS techniques have been developed or proposed. The core idea is to allow a model to \textbf{generate and evaluate multiple solutions or reasoning steps} before finalizing an answer, much like a programmer iteratively writes, tests, and debugs code. This can \textbf{enable smaller models to achieve results on par with much larger models} by compensating with clever search and reasoning. Below is an overview of relevant ITS strategies in the context of code generation:
-\subsection{Inference time scaling}
-% Content from OCR pages 7-8, not applicable, not applicable
-Entity knowledge involves understanding specific real-world entities. Explicit integration increases computational complexity. Work by \cite{hermann2015teaching} highlights challenges and methods like anonymization.
-
-\subsection{Approaches to Improve models performance during inference}
-% Content from OCR page 7, not applicable, not applicable
-Strategies include integrating external knowledge bases (RAG) \cite{guu2020retrieval, lewis2020retrieval}, fact-checking modules \cite{zellers2019defending}, controlled text generation \cite{keskar2019ctrl}, and data curation \cite{gundavarapu2024machine}.
-
-\subsection{Gaps in the Literature}
-% Content from OCR page 8, not applicable, not applicable
-Despite efforts, a gap exists regarding training LLMs without explicit entity knowledge. \cite{hermann2015teaching}'s work supports the notion that anonymized data can be effective. This study aims to fill this gap.
-\clearpage % Start toc on a new page
+% Background and Related Work
+% This chapter provides the technical foundation necessary to understand our approach to enhancing open-source machine learning engineering agents through inference-time scaling. We begin by establishing key concepts in large language models and their inference mechanisms, then explore how inference-time scaling has proven effective across various domains, before examining the specific challenges and opportunities in ML engineering automation.
+% 2.1 Large Language Models and Inference
+% 2.1.1 Foundation Models and Training Paradigms
+% Large Language Models (LLMs) are transformer-based neural networks trained on vast text corpora to predict the next token in a sequence. The training process typically involves three stages: pretraining on diverse internet text to learn general language understanding, supervised fine-tuning on curated instruction-following datasets to align with human preferences, and reinforcement learning from human feedback (RLHF) to further refine behavior through preference optimization techniques like PPO or DPO.
+% The pretraining phase establishes the model's foundational capabilities—its understanding of syntax, semantics, factual knowledge, and reasoning patterns. Fine-tuning then shapes how these capabilities are expressed, teaching the model to follow instructions, engage in dialogue, and perform specific tasks. This multi-stage approach has proven crucial for creating models that are both knowledgeable and helpful.
+% 2.1.2 Inference Mechanisms and Decoding Strategies
+% During inference, LLMs generate text through autoregressive decoding, where each token is predicted based on all previous tokens in the sequence. The decoding process involves several key parameters that significantly influence output quality and diversity:
+% Temperature controls the randomness of token selection, with lower values (0.1-0.3) producing more deterministic outputs and higher values (0.7-1.0) increasing creativity and variability. Top-k sampling restricts token selection to the k most probable candidates, while top-p (nucleus) sampling dynamically adjusts the candidate pool based on cumulative probability mass, typically set between 0.8-0.95 for optimal balance between coherence and diversity.
+% Beam search represents an alternative decoding strategy that maintains multiple candidate sequences simultaneously, exploring different paths through the probability space. While computationally more expensive than sampling methods, beam search can produce higher-quality outputs for tasks requiring careful reasoning or structured responses.
+% The choice of decoding strategy and parameters can dramatically affect model performance on complex tasks, making inference-time optimization a critical consideration for practical applications.
+% 2.1.3 Inference Engines and Deployment
+% Modern LLM deployment relies on specialized inference engines that optimize memory usage, computational efficiency, and throughput. Popular frameworks include vLLM, which uses PagedAttention for efficient memory management, TensorRT-LLM for NVIDIA GPU optimization, llama.cpp for CPU inference, and Text Generation Inference (TGI) for production deployments.
+% These engines implement various optimization techniques including dynamic batching, continuous batching, and KV-cache management to maximize hardware utilization. The choice of inference engine can significantly impact both the speed and cost of serving LLMs, particularly important considerations when deploying open-source models at scale.
+% 2.2 Inference-Time Scaling: Beyond Training Scale
+% While the field has long focused on scaling models through increased parameters and training compute, inference-time scaling (ITS) offers an alternative paradigm where additional computation during inference enhances model capabilities without requiring larger models or extended training.
+% 2.2.1 Core ITS Techniques
+% Chain-of-Thought (CoT) Prompting emerged as one of the first successful ITS techniques, where models are prompted to "think step by step" and show their reasoning process explicitly. This simple modification has shown remarkable effectiveness across mathematical reasoning, logical puzzles, and complex problem-solving tasks, often improving performance by 20-50% on challenging benchmarks.
+% Self-Consistency extends CoT by generating multiple reasoning paths for the same problem and selecting the most frequent answer through majority voting. This technique leverages the insight that correct reasoning paths tend to converge on the same solution, while errors are more likely to be diverse and inconsistent. Self-consistency has demonstrated particular strength in mathematical and logical reasoning tasks.
+% Iterative Self-Debugging allows models to review and refine their own outputs through multiple rounds of generation and critique. The model first produces an initial solution, then analyzes it for potential errors, and finally generates an improved version. This process can be repeated multiple times, with each iteration potentially improving solution quality.
+% Self-Reflection involves explicit metacognitive processes where models evaluate their own reasoning, identify potential weaknesses, and adjust their approach accordingly. Unlike self-debugging, which focuses on error correction, self-reflection emphasizes strategic thinking about problem-solving approaches.
+% 2.2.2 ITS Success Across Domains
+% The effectiveness of ITS techniques has been demonstrated across numerous domains. In mathematical reasoning, techniques like self-consistency have improved performance on GSM8K and MATH benchmarks by substantial margins. In code generation, iterative refinement approaches have shown significant improvements on programming challenges, with models able to debug and optimize their initial solutions.
+% Scientific reasoning tasks have also benefited from ITS, with models showing improved performance on physics problems, chemistry questions, and biological reasoning when given additional inference-time computation. The pattern is consistent: domains that require careful reasoning and step-by-step analysis tend to benefit most from ITS techniques.
+% Notably, these improvements often scale predictably with inference-time compute, following power-law relationships similar to those observed in training-time scaling. This suggests that ITS represents a fundamental trade-off between model size and inference cost, potentially democratizing access to high-performance AI capabilities.
+% 2.3 Reasoning Models and Distillation
+% 2.3.1 The DeepSeek-R1 Family
+% DeepSeek-R1 represents a significant advancement in open-source reasoning models, trained specifically to excel at step-by-step reasoning and complex problem-solving. The model family includes variants at 7B, 14B, and 32B parameters, each distilled from larger teacher models while maintaining strong reasoning capabilities.
+% The distillation process preserves the reasoning patterns and step-by-step thinking that make larger models effective, compressing these capabilities into more accessible model sizes. This approach has proven particularly effective for mathematical reasoning, code generation, and logical problem-solving—precisely the capabilities needed for effective ML engineering agents.
+% 2.3.2 Structured Output Generation
+% Modern reasoning models increasingly support structured output generation, allowing them to produce JSON, XML, or custom formatted responses reliably. This capability is crucial for agentic applications, where models must interact with external tools and APIs through precise data formats.
+% Function calling and tool use capabilities enable models to interact with external systems programmatically, calling predefined functions with structured arguments and processing their returns. These capabilities are essential for ML engineering agents that must interact with databases, APIs, file systems, and computational environments.
+% 2.4 Agentic Systems and Scaffolding
+% 2.4.1 From Language Models to Autonomous Agents
+% The transition from language models to autonomous agents represents one of the most significant developments in recent AI research. While language models excel at generating text responses to prompts, agents can plan multi-step actions, maintain state across interactions, and pursue complex goals autonomously.
+% This transformation requires scaffolding—the software architecture that enables language models to interact with environments, maintain memory, and execute complex workflows. Scaffolding typically includes components for planning, memory management, tool integration, and error handling, creating a bridge between the model's language capabilities and real-world task execution.
+% 2.4.2 Agent Architectures for Coding
+% Coding agents face unique challenges compared to general-purpose agents. They must understand complex technical specifications, navigate large codebases, execute and debug code, and maintain consistency across multiple files and functions. Several architectural patterns have emerged to address these challenges:
+% Tree-search based agents explore multiple solution paths simultaneously, using techniques borrowed from game-playing AI to navigate the space of possible implementations. Iterative refinement agents start with simple solutions and progressively add complexity through multiple rounds of generation and testing. Modular agents decompose large problems into smaller subproblems, solving each component independently before integration.
+% 2.4.3 The AIDE Framework
+% AIDE (AI-Driven Exploration) represents a sophisticated agent scaffolding specifically designed for data science and machine learning tasks. The framework implements a tree-search approach where agents explore multiple solution strategies, evaluate their effectiveness, and refine their approaches based on feedback from code execution and validation metrics.
+% AIDE's architecture includes several key components: a planner that decomposes high-level goals into executable steps, an executor that runs code and captures results, a evaluator that assesses solution quality, and a memory system that maintains context across interactions. This modular design allows for systematic exploration of solution spaces while maintaining coherent progress toward task objectives.
+% The original AIDE framework demonstrated impressive performance on data science competitions, but its reliance on general-purpose tree search and single-shot operation execution leaves room for enhancement through inference-time scaling techniques.
+% 2.5 Machine Learning Engineering Benchmarks
+% 2.5.1 The MLE-Bench Suite
+% MLE-Bench represents the first comprehensive benchmark specifically designed to evaluate AI agents on end-to-end machine learning engineering tasks. Unlike traditional coding benchmarks that focus on algorithmic problems or simple function implementation, MLE-Bench requires agents to handle complete ML workflows including data preprocessing, model selection, hyperparameter optimization, and submission formatting.
+% The benchmark comprises competitions from multiple ML domains including computer vision, natural language processing, tabular data analysis, time series forecasting, recommendation systems, and specialized domains like bioinformatics and materials science. Each competition provides realistic datasets, evaluation metrics, and submission requirements that mirror real-world ML engineering challenges.
+% 2.5.2 Evaluation Methodology
+% MLE-Bench evaluations involve several stages: setup where agents access competition data and requirements, exploration where they analyze datasets and plan approaches, implementation where they develop and test solutions, and submission where they format results according to competition requirements.
+% Success is measured not only by final performance on held-out test sets but also by the agent's ability to navigate the complete workflow autonomously. This includes handling data quality issues, selecting appropriate evaluation strategies, and producing properly formatted submissions—capabilities that are essential for practical ML engineering but often overlooked in traditional benchmarks.
+% 2.6 Research Gaps and Opportunities
+% Despite significant progress in both ITS techniques and agentic systems, several key gaps remain that motivate our work:
+% Limited Integration: While ITS techniques have proven effective across various domains, their systematic integration with agentic scaffolds remains under-explored. Most existing work applies ITS techniques in isolation rather than as part of comprehensive agent architectures.
+% Open-Source Focus: The majority of advanced agentic systems rely on proprietary models accessed through APIs, creating barriers to accessibility and customization. Open-source implementations that can be deployed independently remain limited.
+% ML Engineering Specificity: While coding agents have received significant attention, ML engineering presents unique challenges that require specialized approaches. The combination of data analysis, model development, and systematic experimentation demands capabilities beyond general programming.
+% Systematic Evaluation: Comprehensive evaluation of different ITS techniques within agentic contexts, particularly for specialized domains like ML engineering, remains limited. Most studies focus on single techniques or narrow task domains.
+% Our work addresses these gaps by systematically integrating multiple ITS techniques within an open-source agentic scaffold, specifically tailored for ML engineering tasks and evaluated comprehensively on realistic benchmarks. This approach enables us to explore fundamental questions about the effectiveness of inference-time scaling for complex, multi-step reasoning tasks while providing practical tools for the broader research community.
+% % \end{document}
