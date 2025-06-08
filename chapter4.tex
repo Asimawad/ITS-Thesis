@@ -1,55 +1,17 @@
-\chapter{Summary of Results}
+\chapter{Inference-Time Scaling Strategies}
 
-This chapter provides a concise overview of the experimental results, presenting the key aggregate performance metrics and empirical code generation capabilities for the evaluated agent configurations on the MLE-Bench subset.
+Building upon the customized AIDE agent scaffold and the vLLM-powered local inference environment detailed in Chapter 3, this chapter focuses on the specific Inference-Time Scaling (ITS) strategies implemented and evaluated in this thesis. The core objective of integrating these strategies is to enhance the problem-solving capabilities, robustness, and overall performance of open-source Large Language Models when applied to the complex machine learning engineering tasks presented by the MLE-Bench.
 
-\section{Aggregate Performance Summary}
+Each of the following subsections will describe an ITS technique, briefly revisiting its theoretical underpinnings, and then detailing its concrete implementation within our modified AIDE framework. We will outline the specific algorithmic modifications, data flow, and key parameters associated with each strategy, providing the necessary context for understanding how these techniques augment the agent's reasoning and generation processes. The quantitative impact of these strategies on performance metrics will be presented and analyzed in Chapter 5.
 
-% Table \ref{tab:summary_aggregate} summarizes the overall performance of each model configuration, focusing on key metrics such as Valid Submission Rate (VSR), Above Median Rate (AMR), and Any Medal Rate (Pass@3). Made Submission is also included as a primary pipeline success indicator.
+The ITS strategies explored in this work include Self-Reflection (SR), Self-Consistency (SC), Iterative Self-Debugging (ISDb), Prompt/Code Chaining (PC), and Tree of Thoughts (ToT).
 
-% \begin{table}[h!]
-%     \centering
-%     \caption{Summary of Aggregate Performance Metrics}
-%     \label{tab:summary_aggregate}
-%     % Using tabularx to make the table fit within the text width
-%     \begin{tabularx}{\textwidth}{p{4.5cm} *{4}{>{\centering\arraybackslash}X}}
-%         \toprule
-%         Method                      & Made Submission (\%) & Valid Submission (\%) & Above Median (\%) & Any Medal (Pass@3 \%) \\
-%         \midrule
-%         \textbf{AIDE} & & & & \\
-%         AIDE + o1-preview          & - & - & - & - \\
-%         AIDE + GPT-4-turbo         & 73.3 $\pm$ 3.3 & 63.3 $\pm$ 3.3 & 20.0 $\pm$ 5.8 & 6.7 \\ % Pass@3 based on provided table
-%         AIDE + gpt-4o-mini         & 76.7 $\pm$ 2.4 & 63.3 $\pm$ 2.4 & 26.7 $\pm$ 2.4 & 10.0 \\ % Pass@3 based on provided table
-%         AIDE + DeepSeek-7B (Base)  & 23.3 $\pm$ 3.3 & 20.0 $\pm$ 0.0 & 0.0 $\pm$ 0.0 & 0.0 \\ % Pass@3 based on provided table
-%         AIDE + DeepSeek-7B + SR    & - & - & - & - \\
-%         AIDE + DeepSeek-14B (Base) & 73.3 $\pm$ 2.4 & 60.0 $\pm$ 4.1 & 10.0 $\pm$ 4.1 & 10.0 \\ % Pass@3 based on provided table
-%         AIDE + DeepSeek-14B + SR   & - & - & - & - \\
-%         AIDE + DeepSeek-32B (Base) & 76.7 $\pm$ 3.3 & 63.3 $\pm$ 3.3 & 33.3 $\pm$ 3.3 & 20.0 \\ % Pass@3 based on provided table
-%         AIDE + DeepSeek-32B + SR   & - & - & - & - \\
-%         \midrule
-%         \textbf{Human Performance} & - & - & 50.0 & 12.4 \\
-%         \bottomrule
-%     \end{tabularx}
-%     \caption*{\textbf{Note}: Metrics are mean $\pm$ standard error of the mean, averaged across 10 competitions and 3 seeds, except for Pass@3 which is the percentage of competitions with at least one medal across 3 seeds. SR denotes Self-Reflection strategy. Entries marked '-' indicate data was not available in the provided context.}
-% \end{table}
+\section{Self-Reflection (SR)}
 
-% \section{Empirical Code Generation and Submission Attempt Summary}
+\section{Self-Consistency (SC)}
 
-% Table \ref{tab:summary_empirical} provides a summary of the average empirical metrics, highlighting the agent's code generation capabilities and pipeline progression based on Valid Code Generation Rate (VCGR), CSV Submission Attempt Rate (CSAR), Average Steps to First Working Output (StepsToWO), and Average Code Quality.
+\section{Prompt/Code chaining (PC)}
 
-% \begin{table}[h!]
-%     \centering
-%     \caption{Summary of Empirical Code Generation and Submission Attempt Metrics}
-%     \label{tab:summary_empirical}
-%     % Using tabularx to make the table fit within the text width
-%     \begin{tabularx}{\textwidth}{p{4.5cm} *{5}{>{\centering\arraybackslash}X}}
-%         \toprule
-%         Metric                     & AIDE + gpt-4o-mini & AIDE + GPT-4-turbo & AIDE + DeepSeek-7B (Base) & AIDE + DeepSeek-14B (Base) & AIDE + DeepSeek-32B (Base) \\
-%         \midrule
-%         VCGR (\%)                   & 40.53              & 40.40              & 3.73                      & 24.83                      & 25.63                      \\
-%         CSAR (\%)                   & 41.47              & 41.87              & 4.93                      & 29.24                      & 26.50                      \\
-%         Avg. Steps to First WO     & 9.77               & 12.00              & 28.77                     & 13.86                      & 13.56                      \\
-%         Avg. Code Quality (1-10)    & 5.76               & 5.86               & 3.66                      & 5.00                       & 5.26                       \\
-%         \bottomrule
-%     \end{tabularx}
-%     \caption*{\textbf{Note}: Metrics are averaged over all available runs (typically 10 competitions $\times$ 3 seeds). VCGR is the percentage of steps generating valid code. CSAR is the percentage of steps attempting a CSV submission. StepsToWO is the average number of steps to the first working output (using the \texttt{StepsToWO\_inf\_replaced} value from the source data). Avg. Code Quality is on a scale of 1--10. Data for models with the Self-Reflection strategy was not available in the provided aggregate empirical summaries.}
-% \end{table}
+\section{Iterative self debugging (ISDB)}
+
+\section{Tree of Thoughts (ToT)}
